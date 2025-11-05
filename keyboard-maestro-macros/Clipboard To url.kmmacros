@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>CreationDate</key>
+		<real>534489602.14076197</real>
+		<key>CustomIconData</key>
+		<string>KMEP-Finder</string>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>ActionUID</key>
+						<integer>16410005</integer>
+						<key>MacroActionType</key>
+						<string>SetVariableToText</string>
+						<key>Text</key>
+						<string>%SystemClipboard%</string>
+						<key>Variable</key>
+						<string>LinkList</string>
+					</dict>
+					<dict>
+						<key>ActionUID</key>
+						<integer>16410006</integer>
+						<key>DisplayKind</key>
+						<string>Window</string>
+						<key>HonourFailureSettings</key>
+						<true/>
+						<key>IncludeStdErr</key>
+						<false/>
+						<key>IncludedVariables</key>
+						<array>
+							<string>9999</string>
+						</array>
+						<key>MacroActionType</key>
+						<string>ExecuteShellScript</string>
+						<key>Path</key>
+						<string></string>
+						<key>Source</key>
+						<string>Nothing</string>
+						<key>Text</key>
+						<string># 获取 Finder 当前目录
+target_dir=$(osascript -e 'tell application "Finder" to POSIX path of (target of front Finder window as alias)')
+
+# 获取 KM 变量
+text=$(osascript -e 'tell application "Keyboard Maestro Engine" to getvariable "LinkList"')
+
+# 将内容按两行一组解析
+# 假设格式：标题\n链接\n\n标题\n链接...
+# 注意处理可能的最后一行没有空行的情况
+
+# 使用 awk 处理
+awk -v dir="$target_dir" '
+BEGIN { RS=""; FS="\n" }
+{
+  for (i = 1; i &lt;= NF; i += 2) {
+    title = $i
+    url = $(i+1)
+    if (title != "" &amp;&amp; url != "") {
+      # 替换非法字符
+      gsub(/[\/:*?"&lt;&gt;|]/, "_", title)
+      filename = dir "/" title ".url"
+      print "[InternetShortcut]\nURL=" url &gt; filename
+      close(filename)
+    }
+  }
+}
+' &lt;&lt;&lt; "$text"</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+					</dict>
+				</array>
+				<key>CreationDate</key>
+				<real>782186264.17028499</real>
+				<key>ModificationDate</key>
+				<real>782186978.27821803</real>
+				<key>Name</key>
+				<string>Clipboard To .url</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>9</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2048</integer>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>BF0C7397-0DF8-481B-B139-56D1CBEF6734</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Finder</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Included</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.apple.finder</string>
+					<key>Name</key>
+					<string>Finder</string>
+					<key>NewFile</key>
+					<string>/System/Library/CoreServices/Finder.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>ToggleMacroUID</key>
+		<string>2AF34B10-76D9-45F7-93E2-51F521F1BD7A</string>
+		<key>UID</key>
+		<string>EF830608-BCDF-4745-A801-AC90690ECBD0</string>
+	</dict>
+</array>
+</plist>
