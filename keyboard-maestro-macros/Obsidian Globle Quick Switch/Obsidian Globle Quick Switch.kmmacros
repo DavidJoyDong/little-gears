@@ -61,7 +61,7 @@
 								<key>MacroActionType</key>
 								<string>ActivateApplication</string>
 								<key>ReopenWindows</key>
-								<false/>
+								<true/>
 								<key>TimeOutAbortsMacro</key>
 								<true/>
 							</dict>
@@ -82,8 +82,6 @@
 								<string>Front</string>
 							</dict>
 						</array>
-						<key>IsDisclosed</key>
-						<false/>
 						<key>MacroActionType</key>
 						<string>IfThenElse</string>
 						<key>ThenActions</key>
@@ -535,7 +533,7 @@
 				//2jAAAD3AAAwGw=
 				</data>
 				<key>ModificationDate</key>
-				<real>785228102.39783299</real>
+				<real>785228531.969365</real>
 				<key>Name</key>
 				<string>Obsidian Globle Quick Switch</string>
 				<key>Triggers</key>
