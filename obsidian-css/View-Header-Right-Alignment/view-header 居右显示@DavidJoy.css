@@ -1,0 +1,16 @@
+/* create_time: 202512041824 idea@DavidJoy Code@Google Gemini */
+/* 1. 让标题容器的内容靠右对齐 */
+.view-header-title-container {
+    justify-content: flex-end !important;
+}
+
+/* 2. 确保进入编辑模式（点击文件名）时，输入框也靠右对齐 */
+.view-header-title-container input {
+    text-align: right !important;
+    right: 0 !important; /* 防止输入框定位偏移 */
+}
+
+/* 3. (可选) 给右侧稍微留点空隙，避免紧贴着那个“...”菜单按钮 */
+.view-header-title {
+    padding-right: 10px;
+}
