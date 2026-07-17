@@ -5,4 +5,5 @@
   - 方便交流技术。
 - 文件夹命名说明
   - KM：Keyboard Maestro Macros，核心文件拓展名为 `.kmmacros`
-  - CSS：核心文件拓展名为 `.css`
+  - ObsidianCSS：给 Obsidian 使用的 CSS 片段
+  - Agent：给 AI Agent 读取的说明文件
